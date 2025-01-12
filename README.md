@@ -1,65 +1,147 @@
-# Indian Mythology AI Chatbot
+# Indian Mythology Chatbot using RAG
 
-This project is an **Indian Mythology AI Chatbot** that provides answers and engages in conversations about the **Mahabharata** and **Ramayana**, two great epics of Indian mythology. The chatbot uses **Node.js** for the backend, **React.js** for the frontend, and leverages the **RAG (Retrieval-Augmented Generation)** pipeline with **LangChain** to retrieve and generate relevant responses.
-
----
+A chatbot built using the RAG (Retrieval Augmented Generation) approach that answers questions about Indian mythology, specifically focusing on the Ramayana and Mahabharata epics.
 
 ## Features
 
-- **Mythology Query Handling**: The chatbot responds to user queries about Mahabharata and Ramayana.
-- **RAG Pipeline**: Combines retrieval and generation for accurate and relevant answers.
-- **Frontend**: Built with React.js and styled using Tailwind CSS for a smooth and interactive user experience.
-- **Backend**: Powered by Node.js for scalable and fast response handling.
-- **Language Processing**: Utilizes LangChain to manage the retrieval and response generation process.
+- Real-time chat interface
+- Context-aware responses using RAG
+- Source attribution for answers
+- Efficient text chunking and retrieval
+- Built with MERN stack + LangChain
 
----
+## Tech Stack
+
+- Frontend: React (Vite) + Tailwind CSS
+- Backend: Node.js + Express
+- AI/ML: LangChain + OpenAI
+- Text Processing: Character Text Splitter
+- Vector Store: Memory Vector Store
 
 ## Project Structure
-
-### 1. Frontend (Client)
-- **Framework**: React.js
-- **Folder**: `Client/vite-project`
-- Contains the frontend application built using Vite.js and React.js.
-
-#### Key Files:
-- `src/App.jsx`: Main component rendering the application.
-- `src/assets`: Folder for static assets like images.
-- `src/index.css`: CSS styles applied globally.
-- `src/main.jsx`: Entry point for the React application.
-- `index.html`: HTML template for the application.
-- `tailwind.config.js`: Tailwind CSS configuration.
-- `vite.config.js`: Vite.js configuration file.
-
-### 2. Backend (Server)
-- **Framework**: Node.js
-- **Folder**: `Server/src`
-- Handles the RAG pipeline, routing, and services.
-
-#### Key Files:
-- `src/config/ragConfig.js`: Configuration for the RAG pipeline.
-- `src/controllers/chatController.js`: Manages chatbot interactions.
-- `src/routes/chatRoutes.js`: Defines backend API routes.
-- `src/services/ragService.js`: Core service for the retrieval and generation process.
-- `src/data`: Contains the **Mahabharata** and **Ramayana** text files used for retrieval.
-- `app.js` & `server.js`: Backend initialization and server setup.
-
----
+```
+project/
+├── client/                # Frontend (Vite + React)
+│   └── vite-project/
+│       ├── src/
+│       │   ├── App.jsx
+│       │   └── index.css
+│       └── package.json
+│
+└── server/               # Backend (Node + Express)
+    ├── src/
+    │   ├── config/
+    │   │   └── ragConfig.js
+    │   ├── controllers/
+    │   │   └── chatController.js
+    │   ├── data/
+    │   │   ├── mahabharata.txt
+    │   │   └── ramayana.txt
+    │   ├── routes/
+    │   │   └── chatRoutes.js
+    │   ├── services/
+    │   │   └── ragService.js
+    │   └── utils/
+    │       ├── downloadTexts.js
+    │       └── usageTracker.js
+    ├── app.js
+    └── server.js
+```
 
 ## Prerequisites
 
-Ensure you have the following installed:
+- Node.js (v14 or higher)
+- npm or yarn
+- OpenAI API key
 
-1. **Node.js** (v14+ recommended)
-2. **npm** or **yarn** for managing dependencies
-3. **Git** for version control
-4. **Vite.js** for React frontend development
-5. **LangChain** library (installed via npm in the backend)
+## Installation & Setup
 
----
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd Chatbot
+   ```
 
-## How to Start the Project
+2. **Backend Setup**
+   ```bash
+   cd server
+   npm install
+   ```
 
-### 1. Clone the Repository
-```bash
-git clone <your-repo-link>
-cd chatbot-rag
+   Create a `.env` file in the server directory:
+   ```
+   OPENAI_API_KEY=your_api_key_here
+   PORT=3000
+   ```
+
+3. **Frontend Setup**
+   ```bash
+   cd client/vite-project
+   npm install
+   ```
+
+4. **Download Text Files**
+   ```bash
+   cd server
+   node src/utils/downloadTexts.js
+   ```
+
+## Running the Application
+
+1. **Start the Backend Server**
+   ```bash
+   cd server
+   npm run dev
+   ```
+   The server will start on http://localhost:3000
+
+2. **Start the Frontend Development Server**
+   ```bash
+   cd client/vite-project
+   npm run dev
+   ```
+   The frontend will start on http://localhost:5173
+
+## API Endpoints
+
+- `POST /api/chat` - Send questions and get responses
+  ```json
+  {
+    "message": "Who is Krishna?"
+  }
+  ```
+
+## Important Notes
+
+- The first request might take longer as it initializes the RAG system
+- Subsequent requests will be faster
+- The OpenAI API key should be kept secret
+- Text files are automatically downloaded on setup
+
+## Development
+
+- Backend development server (with hot reload):
+  ```bash
+  cd server
+  npm run dev
+  ```
+
+- Frontend development server:
+  ```bash
+  cd client/vite-project
+  npm run dev
+  ```
+
+## Troubleshooting
+
+1. If you encounter CORS issues, ensure the backend is running on port 3000
+2. If responses are slow, check the chunk size in ragService.js
+3. For OpenAI API errors, verify your API key in .env file
+
+
+
+## Acknowledgments
+
+- OpenAI for the API
+- LangChain for the RAG implementation
+- Project texts from Project Gutenberg
